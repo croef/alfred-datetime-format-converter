@@ -41,7 +41,7 @@ def alfred_items_for_value(value):
     item_value = calendar.timegm(value.datetime.utctimetuple())
     results.append(alfred.Item(
         title=str(item_value),
-        subtitle=u'UTC Timestamp',
+        subtitle=u'GMT+8 Timestamp',
         attributes={
             'uid': alfred.uid(index), 
             'arg': item_value,

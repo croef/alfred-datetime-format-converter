@@ -7,8 +7,8 @@ from dateutil.parser import parse as capture
 from .exceptions import DeloreanInvalidDatetime
 from .dates import Delorean, is_datetime_naive, datetime_timezone
 
-UTC = "UTC"
-utc = timezone("utc")
+UTC = "Asia/Shanghai"
+utc = timezone("Asia/Shanghai")
 
 
 def parse(s, dayfirst=True, yearfirst=True):
@@ -102,7 +102,9 @@ def stops(freq, interval=1, count=None, wkst=None, bysetpos=None,
 
 
 def epoch(s):
-    dt = datetime.utcfromtimestamp(s)
+    if s > 9999999999:
+        s = s / 1000
+    dt = datetime.fromtimestamp(s, tz=utc)
     return Delorean(datetime=dt, timezone=UTC)
 
 
@@ -114,7 +116,7 @@ def utcnow():
     """
     Return a delorean object, with utcnow as the datetime
     """
-    return Delorean()
+    return Delorean(timezone=UTC)
 
 
 def now():
