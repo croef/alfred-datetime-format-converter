@@ -39,6 +39,7 @@ def alfred_items_for_value(value):
 
     # First item as timestamp
     item_value = calendar.timegm(value.datetime.utctimetuple())
+    item_value = '{}'.format(item_value)
     results.append(alfred.Item(
         title=str(item_value),
         subtitle=u'GMT+8 Timestamp',
@@ -49,7 +50,6 @@ def alfred_items_for_value(value):
         icon='icon.png',
     ))
     index += 1
-
     # Various formats
     formats = [
         # 1937-01-01 12:00:27
@@ -75,7 +75,6 @@ def alfred_items_for_value(value):
         icon='icon.png',
         ))
         index += 1
-
     return results
 
 if __name__ == "__main__":

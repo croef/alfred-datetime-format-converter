@@ -26,9 +26,9 @@ class Item(object):
         try:
             items = value.iteritems()
         except AttributeError:
-            return unicode(value)
+            return value
         else:
-            return dict(map(unicode, item) for item in items)
+            return dict(item for item in items)
 
     def __init__(self, attributes, title, subtitle, icon=None):
         self.attributes = attributes
@@ -49,7 +49,7 @@ class Item(object):
                 (value, attributes) = value
             except:
                 attributes = {}
-            SubElement(item, attribute, self.unicode(attributes)).text = unicode(value)
+            SubElement(item, attribute, self.unicode(attributes)).text = str(value)
         return item
 
 def args(characters=None):
@@ -59,10 +59,10 @@ def config():
     return _create('config')
 
 def decode(s):
-    return unicodedata.normalize('NFC', s.decode('utf-8'))
+    return unicodedata.normalize('NFC', s)
 
 def uid(uid):
-    return u'-'.join(map(unicode, (bundleid, uid)))
+    return '{}-{}'.format(bundleid, uid)
 
 def unescape(query, characters=None):
     for character in (UNESCAPE_CHARACTERS if (characters is None) else characters):
@@ -77,7 +77,7 @@ def work(volatile):
     return _create(os.path.join(os.path.expanduser(path), bundleid))
 
 def write(text):
-    sys.stdout.write(text)
+    sys.stdout.write(str(text, 'utf-8'))
 
 def xml(items, maxresults=_MAX_RESULTS_DEFAULT):
     root = Element('items')
