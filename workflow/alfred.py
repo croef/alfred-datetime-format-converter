@@ -17,8 +17,8 @@ UNESCAPE_CHARACTERS = u""" ;()"""
 
 _MAX_RESULTS_DEFAULT = 9
 
-preferences = plistlib.readPlist('info.plist')
-bundleid = preferences['bundleid']
+# preferences = plistlib.readPlist('info.plist')
+bundleid = 'com.michaelwaterfall.datetime-format-converter'
 
 class Item(object):
     @classmethod
